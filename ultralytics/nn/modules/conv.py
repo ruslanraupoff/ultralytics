@@ -352,10 +352,10 @@ class GSConvE(nn.Module):
 	https://github.com/AlanLi1997/rethinking-fpn
 	GSConvE enhancement for representation learning
 	'''
-	def __init__(self, c1, c2, k=1, s=1, g=1, d=1, act=True):
+	def __init__(self, c1, c2, k=1, s=1, p=None, g=1, d=1, act=True):
 		super().__init__()
 		c_ = c2 // 2
-		self.cv1 = Conv(c1, c_, k, s, None, g, d, act)
+		self.cv1 = Conv(c1, c_, k, s, p, g, d, act)
 		self.cv2 = nn.Sequential(
 			nn.Conv2d(c_, c_, 3, 1, 1, bias=False),
 			nn.Conv2d(c_, c_, 3, 1, 1, groups=c_, bias=False),
@@ -370,3 +370,4 @@ class GSConvE(nn.Module):
 		y = y.reshape(y.shape[0], 2, y.shape[1] // 2, y.shape[2], y.shape[3])
 		y = y.permute(0, 2, 1, 3, 4)
 		return y.reshape(y.shape[0], -1, y.shape[3], y.shape[4])
+    

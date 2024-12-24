@@ -1011,7 +1011,12 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                     max(round(min(args[2], max_channels // 2 // 32)) * width, 1) if args[2] > 1 else args[2]
                 )  # num heads
 
-            args = [c1, c2, *args[1:]]
+            if m is SNI:
+                c2 = make_divisible(args[0] * width, 8)
+                args = [c1, c2, args[1]]
+            else:
+                args = [c1, c2, *args[1:]]
+
             if m in {
                 BottleneckCSP,
                 C1,
@@ -1034,6 +1039,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 legacy = False
                 if scale in "mlx":
                     args[3] = True
+            
         elif m is AIFI:
             args = [ch[f], *args]
         elif m in {HGStem, HGBlock}:

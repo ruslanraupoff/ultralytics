@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, './ultralytics')
+sys.path.insert(0, 'ultralytics/')
 
 import ultralytics
 print(ultralytics.checks())

@@ -24,26 +24,24 @@ backbone:
   - [-1, 1, Conv, [1024, 3, 2]] # 7-P5/32
   - [-1, 2, C3k2, [1024, True]]
   - [-1, 1, SPPF, [1024, 5]] # 9
-  - [-1, 1, BiLevelRoutingAttention, [256]] # 10 # TODO
   - [-1, 2, C2PSA, [1024]] # 11
 
 # YOLO11n head
 head:
-  - [-1, 1, SNI, [1024, 2]] # TODO
-  # - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [-1, 1, SNI, [1024, 2]] # SNI
   - [[-1, 6], 1, Concat, [1]] # cat backbone P4
   - [-1, 2, C3k2, [512, False]] # 13
 
-  - [-1, 1, SNI, [512, 2]] # TODO
+  - [-1, 1, SNI, [512, 2]] # SNI
   # - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
   - [[-1, 4], 1, Concat, [1]] # cat backbone P3
   - [-1, 2, C3k2, [256, False]] # 16 (P3/8-small)
 
-  - [-1, 1, GSConvE, [256, 3, 2]] # TODO
+  - [-1, 1, GSConvE, [256, 3, 2]] # GSConvE
   - [[-1, 13], 1, Concat, [1]] # cat head P4
   - [-1, 2, C3k2, [512, False]] # 19 (P4/16-medium)
 
-  - [-1, 1, GSConvE, [512, 3, 2]] # TODO
+  - [-1, 1, GSConvE, [512, 3, 2]] # GSConvE
   - [[-1, 10], 1, Concat, [1]] # cat head P5
   - [-1, 2, C3k2, [1024, True]] # 22 (P5/32-large)
 

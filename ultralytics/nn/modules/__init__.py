@@ -56,6 +56,7 @@ from .block import (
     RepVGGDW,
     ResNetLayer,
     SCDown,
+    BiLevelRoutingAttention
 )
 from .conv import (
     CBAM,
@@ -160,4 +161,5 @@ __all__ = (
     "PSA",
     "SNI",
     "GSConvE",
+    "BiLevelRoutingAttention",
 )

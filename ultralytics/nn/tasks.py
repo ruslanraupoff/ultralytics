@@ -63,6 +63,7 @@ from ultralytics.nn.modules import (
     v10Detect,
     SNI,
     GSConvE,
+    BiLevelRoutingAttention,
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, colorstr, emojis, yaml_load
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -1040,7 +1041,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 if scale in "mlx":
                     args[3] = True
             
-        elif m is AIFI:
+        elif m is {AIFI, BiLevelRoutingAttention}:
             args = [ch[f], *args]
         elif m in {HGStem, HGBlock}:
             c1, cm, c2 = ch[f], args[0], args[1]
